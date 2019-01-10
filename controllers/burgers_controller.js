@@ -30,12 +30,16 @@ router.post("/burgers/create", function(req, res) {
 
 // put route -> back to index
 router.put("/burgers/update/:id", function(req, res) {
-  burger.update(req.params.id, function(result) {
+  console.log(req.params.id)
+  var condition = "id = " + req.params.id
+  burger.update("burgers",{
+    devoured:true
+  }, condition, function(res) {  
     // wrapper for orm.js that using MySQL update callback will return a log to console,
     // render back to index with handle
-    console.log(result);
+    
     // Send back response and let page reload from .then in Ajax
-    res.json("/");
+    res.json("/")
   });
 });
 
